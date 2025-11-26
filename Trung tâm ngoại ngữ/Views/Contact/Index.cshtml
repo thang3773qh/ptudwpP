@@ -60,31 +60,31 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                    <form action="/contact/create" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
                         <div class="row gy-4">
 
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                                <input type="text" name="name" class="form-control" placeholder="Tên" required="" id="c_name">
                             </div>
 
                             <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required="" id="c_email">
                             </div>
 
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                                <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" required="" id="c_phone">
                             </div>
 
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                                <textarea class="form-control" name="message" rows="6" placeholder="Mô tả" required="" id="c_message"></textarea>
                             </div>
 
                             <div class="col-md-12 text-center">
                                 <div class="loading">Loading</div>
                                 <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                                <div class="sent-message">Liên hệ của bạn đã được gửi. Cảm ơn!</div>
 
-                                <button type="submit">Send Message</button>
+                                <button type="submit" id="c_submit">Gửi liên hệ</button>
                             </div>
 
                         </div>

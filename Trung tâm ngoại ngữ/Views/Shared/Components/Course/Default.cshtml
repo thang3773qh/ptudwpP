@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LinguaCenter.Models.TbCourse>
+
+@foreach(var item in Model)
+{
+    string sUrl = $"/course/{item.Alias}-{item.CourseId}.html";
+    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+    <div class="course-item">
+        <img src="@item.Image" class="img-fluid" alt="...">
+        <div class="course-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <p class="category">@item.Category.Name</p>
+                <p class="price">@item.PriceSale VND</p>
+            </div>
+
+            <h3><a href="@sUrl">@item.Title</a></h3>
+            <p class="description">@item.Description</p>
+            <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                    <img src="@item.Trainer.Image" class="img-fluid" alt="">
+                    <a href="" class="trainer-link">@item.Trainer.FullName</a>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                    <i class="bi bi-person user-icon"></i>&nbsp;50
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End Course Item-->
+}
+

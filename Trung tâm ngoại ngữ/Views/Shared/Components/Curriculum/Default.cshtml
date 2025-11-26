@@ -1,0 +1,36 @@
+﻿@model List<CurriculumViewModel>
+
+<div class="course-curriculum" data-aos="fade-up" data-aos-delay="400">
+    <h3>Course Curriculum</h3>
+
+    @foreach (var module in Model)
+    {
+        <div class="curriculum-section">
+            <div class="section-header">
+                <h4>@module.ModuleTitle</h4>
+                <span class="lessons-count">@module.LessonsCount</span>
+            </div>
+
+            <div class="lessons">
+                @foreach (var lesson in module.Lessons)
+                {
+                    <div class="lesson-item">
+                        <div class="lesson-info">
+                            @if (lesson.Type == "video")
+                            {
+                                <i class="bi bi-play-circle"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-file-text"></i>
+                            }
+                            <span>@lesson.Title</span>
+                        </div>
+                        <span class="lesson-duration">@lesson.Duration min</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+

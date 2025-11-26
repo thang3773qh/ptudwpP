@@ -1,0 +1,28 @@
+﻿@model IEnumerable<LinguaCenter.Models.TbTrainer>
+
+@foreach (var item in Model.Take(3))
+{
+    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+        <div class="member">
+            <img src="@item.Image" class="img-fluid" alt="">
+            <div class="member-content">
+                <h4>@item.FullName</h4>
+                <span>@item.Speciality</span>
+                <p>
+                    @item.Description
+                </p>
+                <div class="social">
+                    <a href="@item.Twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="@item.Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="@item.Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="@item.LinkedIn"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Team Member -->
+}
+
+
+

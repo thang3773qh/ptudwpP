@@ -26,4 +26,6 @@ public partial class TbTrainer
     public bool IsActive { get; set; }
 
     public DateTime? CreatedDate { get; set; }
+
+    public virtual ICollection<TbCourse> TbCourses { get; set; } = new List<TbCourse>();
 }
