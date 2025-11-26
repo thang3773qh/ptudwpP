@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Trung_tâm_ngoại_ngữ.Models;
+using LinguaCenter.Models;
 
-namespace Trung_tâm_ngoại_ngữ.Controllers
+namespace LinguaCenter.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,4 @@
-namespace Trung_tâm_ngoại_ngữ.Models
+namespace LinguaCenter.Models
 {
     public class ErrorViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Trung_tâm_ngoại_ngữ.Controllers
+namespace LinguaCenter.Controllers
 {
     public class AboutController : Controller
     {
