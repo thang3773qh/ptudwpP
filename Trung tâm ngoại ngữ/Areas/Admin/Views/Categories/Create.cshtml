@@ -1,0 +1,40 @@
+﻿@model LinguaCenter.Models.TbCategory
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-xl">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới menu</h5>
+                <small class="text-body float-end"><a asp-action="Index">Quay lại danh sách</a></small>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Name" class="control-label">Tiêu đề</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Alias" class="control-label">Alias</label>
+                        <input asp-for="Alias" class="form-control" />
+                        <span asp-validation-for="Alias" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check mb-6">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> Hiện thị
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Tạo" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

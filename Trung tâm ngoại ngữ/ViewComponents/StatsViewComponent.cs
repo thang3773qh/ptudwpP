@@ -17,7 +17,7 @@ namespace LinguaCenter.ViewComponents
         {
             var model = new StatsViewModel
             {
-                //Students = await _context.TbStudents.CountAsync(),
+                Students = await _context.TbOrders.CountAsync(),
                 Courses = await _context.TbCourses.CountAsync(),
                 Events = await _context.TbEvents.CountAsync(),
                 Trainers = await _context.TbTrainers.CountAsync()

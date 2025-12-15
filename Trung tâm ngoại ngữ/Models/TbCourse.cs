@@ -45,5 +45,5 @@ public partial class TbCourse
 
     public virtual ICollection<TbOrder> TbOrders { get; set; } = new List<TbOrder>();
 
-    public virtual TbTrainer Trainer { get; set; } = null!;
+    public virtual TbTrainer? Trainer { get; set; } = null!;
 }

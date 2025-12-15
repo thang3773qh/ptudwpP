@@ -14,6 +14,13 @@ namespace LinguaCenter.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            var orderCounts = await _context.TbOrders
+                .GroupBy(o => o.CourseId)
+                .Select(g => new { CourseId = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.CourseId, x => x.Count);
+
+            ViewBag.OrderCounts = orderCounts;
+
             var items = _context.TbCourses.Include(m => m.Category).Include(m => m.Trainer)
                 .Where(m => (bool)m.IsActive);
             return await Task.FromResult<IViewComponentResult>

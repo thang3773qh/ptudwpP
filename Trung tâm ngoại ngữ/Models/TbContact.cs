@@ -16,6 +16,4 @@ public partial class TbContact
     public string? Message { get; set; }
 
     public DateTime CreatedDate { get; set; }
-
-    public bool IsRead { get; set; }
 }

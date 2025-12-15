@@ -29,11 +29,9 @@ namespace LinguaCenter.Controllers
             {
                 return NotFound();
             }
-            //ViewBag.trainer = _context.TbTrainers
-            //    .Where(i => i.TrainerId == id && i.IsActive).ToList();
-            //ViewBag.productRelated = _context.TbProducts
-            //    .Where(i => i.ProductId != id && i.CategoryProductId == product.CategoryProductId).Take(5)
-            //    .OrderByDescending(i => i.ProductId).ToList();
+
+            ViewBag.OrderCount = await _context.TbOrders.CountAsync(o => o.CourseId == id);
+
             return View(course);
         }
     }

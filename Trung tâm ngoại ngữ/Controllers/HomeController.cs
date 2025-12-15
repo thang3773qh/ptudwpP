@@ -16,11 +16,17 @@ namespace LinguaCenter.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Categories = _context.TbCategories.ToList();
-            ViewBag.popularCourses = _context.TbCourses.Include(m => m.Category).Include(m => m.Trainer)
-                .Where(m => (bool)m.IsActive).ToList();
+            var orderCounts = await _context.TbOrders
+                .GroupBy(o => o.CourseId)
+                .Select(g => new { CourseId = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.CourseId, x => x.Count);
+
+            ViewBag.OrderCounts = orderCounts;
+            ViewBag.Categories = await _context.TbCategories.ToListAsync();
+            ViewBag.popularCourses = await _context.TbCourses.Include(m => m.Category).Include(m => m.Trainer)
+                .Where(m => (bool)m.IsActive).ToListAsync();
             return View();
         }
 

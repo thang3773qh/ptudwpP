@@ -39,6 +39,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+{
+    File.WriteAllText("fatal.log", e.ExceptionObject.ToString());
+};
 
 
 app.Run();

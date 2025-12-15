@@ -1,0 +1,60 @@
+﻿@model LinguaCenter.Models.TbEvent
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-xl">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Sửa sự kiện</h5>
+                <small class="text-body float-end"><a asp-action="Index">Quay lại danh sách</a></small>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input type="hidden" asp-for="EventId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Title" class="control-label">Tiêu đề</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="EventDate" class="control-label">Ngày</label>
+                        <input asp-for="EventDate" class="form-control" />
+                        <span asp-validation-for="EventDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Description" class="control-label">Mô tả</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Image" class="control-label">Hình ảnh</label>
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-success" onclick="openDialog()">Chọn ảnh</button>
+                        </div>
+                        <!-- /btn-group -->
+                        <input type="text" class="form-control" id="file_input" asp-for="Image" aria-describedby="button-addon2">
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check mb-6">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> Hiện thị
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Sửa" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var summerNote = new LinguaCenter.Areas.Admin.Models.SummerNote("#Detail");
+    <partial name="_SummerNote" model="summerNote" />
+}

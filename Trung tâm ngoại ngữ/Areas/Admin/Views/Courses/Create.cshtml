@@ -1,0 +1,103 @@
+﻿@model LinguaCenter.Models.TbCourse
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-xl">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới khóa học</h5>
+                <small class="text-body float-end"><a asp-action="Index">Quay lại danh sách</a></small>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Title" class="control-label">Tiêu đề</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Alias" class="control-label">Alias</label>
+                        <input asp-for="Alias" class="form-control" />
+                        <span asp-validation-for="Alias" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Description" class="control-label">Mô tả</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="ShortDescription" class="control-label">Mô tả ngắn</label>
+                        <input asp-for="ShortDescription" class="form-control" />
+                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Price" class="control-label">Giá</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="PriceSale" class="control-label">Giá khuyến mãi</label>
+                        <input asp-for="PriceSale" class="form-control" />
+                        <span asp-validation-for="PriceSale" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="ContentHours" class="control-label">Số giờ học</label>
+                        <input asp-for="ContentHours" class="form-control" />
+                        <span asp-validation-for="ContentHours" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="TotalWeeks" class="control-label">Số tuần học</label>
+                        <input asp-for="TotalWeeks" class="form-control" />
+                        <span asp-validation-for="TotalWeeks" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Level" class="control-label">Cấp độ</label>
+                        <input asp-for="Level" class="form-control" />
+                        <span asp-validation-for="Level" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Language" class="control-label">Ngôn ngữ</label>
+                        <input asp-for="Language" class="form-control" />
+                        <span asp-validation-for="Language" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Prerequisites" class="control-label">Yêu cầu</label>
+                        <input asp-for="Prerequisites" class="form-control" />
+                        <span asp-validation-for="Prerequisites" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="Image" class="control-label">Hình ảnh</label>
+                        <input asp-for="Image" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="TrainerId" class="control-label">Giảng viên</label>
+                        <select asp-for="TrainerId"
+                                class="form-control"
+                                asp-items="ViewBag.TrainerId">
+                        </select>
+
+                    </div>
+                    <div class="form-group mb-6">
+                        <label asp-for="CategoryId" class="control-label">Danh mục</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                    </div>
+                    <div class="form-group form-check mb-6">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> Hiện thị
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Tạo" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
