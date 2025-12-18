@@ -1,32 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LinguaCenter.Models;
+using LinguaCenter.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LinguaCenter.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LinguaCenter.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AdminAuthorize]
-    public class EventsController : Controller
+    public class AccountsController : Controller
     {
+
         private readonly LinguaCenterContext _context;
 
-        public EventsController(LinguaCenterContext context)
+        public AccountsController(LinguaCenterContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Events
+        // GET: Admin/Accounts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TbEvents.ToListAsync());
+            return View(await _context.TbAccounts.ToListAsync());
         }
 
-        // GET: Admin/Events/Details/5
+        // GET: Admin/Accounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +36,40 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (tbEvent == null)
+            var tbAccount = await _context.TbAccounts
+                .FirstOrDefaultAsync(m => m.AccountId == id);
+            if (tbAccount == null)
             {
                 return NotFound();
             }
 
-            return View(tbEvent);
+            return View(tbAccount);
         }
 
-        // GET: Admin/Events/Create
+        // GET: Admin/Accounts/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Events/Create
+        // POST: Admin/Accounts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Title,EventDate,Description,Image,IsActive")] TbEvent tbEvent)
+        public async Task<IActionResult> Create([Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,IsActive")] TbAccount tbAccount)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbEvent);
+                tbAccount.Password = HashMD5.GetMD5(tbAccount.Password != null ? tbAccount.Password : "");
+                _context.Add(tbAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbEvent);
+            return View(tbAccount);
         }
 
-        // GET: Admin/Events/Edit/5
+        // GET: Admin/Accounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +77,22 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents.FindAsync(id);
-            if (tbEvent == null)
+            var tbAccount = await _context.TbAccounts.FindAsync(id);
+            if (tbAccount == null)
             {
                 return NotFound();
             }
-            return View(tbEvent);
+            return View(tbAccount);
         }
 
-        // POST: Admin/Events/Edit/5
+        // POST: Admin/Accounts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,EventDate,Description,Image,IsActive")] TbEvent tbEvent)
+        public async Task<IActionResult> Edit(int id, [Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,IsActive")] TbAccount tbAccount)
         {
-            if (id != tbEvent.EventId)
+            if (id != tbAccount.AccountId)
             {
                 return NotFound();
             }
@@ -98,12 +101,13 @@ namespace LinguaCenter.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tbEvent);
+                    tbAccount.Password = HashMD5.GetMD5(tbAccount.Password != null ? tbAccount.Password : "");
+                    _context.Update(tbAccount);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TbEventExists(tbEvent.EventId))
+                    if (!TbAccountExists(tbAccount.AccountId))
                     {
                         return NotFound();
                     }
@@ -114,10 +118,10 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbEvent);
+            return View(tbAccount);
         }
 
-        // GET: Admin/Events/Delete/5
+        // GET: Admin/Accounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,34 +129,34 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (tbEvent == null)
+            var tbAccount = await _context.TbAccounts
+                .FirstOrDefaultAsync(m => m.AccountId == id);
+            if (tbAccount == null)
             {
                 return NotFound();
             }
 
-            return View(tbEvent);
+            return View(tbAccount);
         }
 
-        // POST: Admin/Events/Delete/5
+        // POST: Admin/Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbEvent = await _context.TbEvents.FindAsync(id);
-            if (tbEvent != null)
+            var tbAccount = await _context.TbAccounts.FindAsync(id);
+            if (tbAccount != null)
             {
-                _context.TbEvents.Remove(tbEvent);
+                _context.TbAccounts.Remove(tbAccount);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TbEventExists(int id)
+        private bool TbAccountExists(int id)
         {
-            return _context.TbEvents.Any(e => e.EventId == id);
+            return _context.TbAccounts.Any(e => e.AccountId == id);
         }
     }
 }

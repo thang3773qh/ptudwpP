@@ -9,7 +9,7 @@
         <div class="course-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <p class="category">@item.Category.Name</p>
-                <p class="price">@item.PriceSale VND</p>
+                <p class="price">@((item.PriceSale ?? item.Price)) VND</p>
             </div>
 
             <h3><a href="@sUrl">@item.Title</a></h3>

@@ -83,12 +83,26 @@
 
                         <!-- Pricing Card -->
                         <div class="pricing-card">
-                            <div class="price">
-                                <span class="currency">VND</span>
-                                <span class="amount">@Model.PriceSale</span>
-                                <span class="period">/Khóa học</span>
-                            </div>
-                            <div class="original-price">@Model.Price VND</div>
+                            @if (Model.PriceSale != null)
+                            {
+                                <div class="price">
+                                    <span class="currency">VND</span>
+                                    <span class="amount">@Model.PriceSale?.ToString("N0")</span>
+                                    <span class="period">/Khóa học</span>
+                                </div>
+                                <div class="original-price">
+                                    @Model.Price.ToString("N0") VND
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="price">
+                                    <span class="currency">VND</span>
+                                    <span class="amount">@Model.Price.ToString("N0")</span>
+                                    <span class="period">/Khóa học</span>
+                                </div>
+                            }
+
 
                             <div class="course-features">
                                 <div class="feature">

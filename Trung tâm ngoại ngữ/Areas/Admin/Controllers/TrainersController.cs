@@ -10,6 +10,7 @@ using LinguaCenter.Models;
 namespace LinguaCenter.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorize]
     public class TrainersController : Controller
     {
         private readonly LinguaCenterContext _context;

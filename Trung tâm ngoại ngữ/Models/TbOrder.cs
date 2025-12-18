@@ -19,5 +19,5 @@ public partial class TbOrder
 
     public DateTime CreateDate { get; set; }
 
-    public virtual TbCourse Course { get; set; } = null!;
+    public virtual TbCourse? Course { get; set; } = null!;
 }

@@ -11,22 +11,23 @@ namespace LinguaCenter.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AdminAuthorize]
-    public class EventsController : Controller
+    public class OrdersController : Controller
     {
         private readonly LinguaCenterContext _context;
 
-        public EventsController(LinguaCenterContext context)
+        public OrdersController(LinguaCenterContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Events
+        // GET: Admin/Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TbEvents.ToListAsync());
+            var linguaCenterContext = _context.TbOrders.Include(t => t.Course);
+            return View(await linguaCenterContext.ToListAsync());
         }
 
-        // GET: Admin/Events/Details/5
+        // GET: Admin/Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +35,42 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (tbEvent == null)
+            var tbOrder = await _context.TbOrders
+                .Include(t => t.Course)
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (tbOrder == null)
             {
                 return NotFound();
             }
 
-            return View(tbEvent);
+            return View(tbOrder);
         }
 
-        // GET: Admin/Events/Create
+        // GET: Admin/Orders/Create
         public IActionResult Create()
         {
+            ViewData["CourseId"] = new SelectList(_context.TbCourses, "CourseId", "CourseId");
             return View();
         }
 
-        // POST: Admin/Events/Create
+        // POST: Admin/Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Title,EventDate,Description,Image,IsActive")] TbEvent tbEvent)
+        public async Task<IActionResult> Create([Bind("OrderId,CustomerName,Phone,Email,CourseId,Price,CreateDate")] TbOrder tbOrder)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbEvent);
+                _context.Add(tbOrder);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbEvent);
+            ViewData["CourseId"] = new SelectList(_context.TbCourses, "CourseId", "CourseId", tbOrder.CourseId);
+            return View(tbOrder);
         }
 
-        // GET: Admin/Events/Edit/5
+        // GET: Admin/Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +78,23 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents.FindAsync(id);
-            if (tbEvent == null)
+            var tbOrder = await _context.TbOrders.FindAsync(id);
+            if (tbOrder == null)
             {
                 return NotFound();
             }
-            return View(tbEvent);
+            ViewData["CourseId"] = new SelectList(_context.TbCourses, "CourseId", "Title", tbOrder.CourseId);
+            return View(tbOrder);
         }
 
-        // POST: Admin/Events/Edit/5
+        // POST: Admin/Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,EventDate,Description,Image,IsActive")] TbEvent tbEvent)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,CustomerName,Phone,Email,CourseId,Price,CreateDate")] TbOrder tbOrder)
         {
-            if (id != tbEvent.EventId)
+            if (id != tbOrder.OrderId)
             {
                 return NotFound();
             }
@@ -98,12 +103,12 @@ namespace LinguaCenter.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tbEvent);
+                    _context.Update(tbOrder);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TbEventExists(tbEvent.EventId))
+                    if (!TbOrderExists(tbOrder.OrderId))
                     {
                         return NotFound();
                     }
@@ -114,10 +119,11 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbEvent);
+            ViewData["CourseId"] = new SelectList(_context.TbCourses, "CourseId", "CourseId", tbOrder.CourseId);
+            return View(tbOrder);
         }
 
-        // GET: Admin/Events/Delete/5
+        // GET: Admin/Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,34 +131,35 @@ namespace LinguaCenter.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbEvent = await _context.TbEvents
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (tbEvent == null)
+            var tbOrder = await _context.TbOrders
+                .Include(t => t.Course)
+                .FirstOrDefaultAsync(m => m.OrderId == id);
+            if (tbOrder == null)
             {
                 return NotFound();
             }
 
-            return View(tbEvent);
+            return View(tbOrder);
         }
 
-        // POST: Admin/Events/Delete/5
+        // POST: Admin/Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbEvent = await _context.TbEvents.FindAsync(id);
-            if (tbEvent != null)
+            var tbOrder = await _context.TbOrders.FindAsync(id);
+            if (tbOrder != null)
             {
-                _context.TbEvents.Remove(tbEvent);
+                _context.TbOrders.Remove(tbOrder);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TbEventExists(int id)
+        private bool TbOrderExists(int id)
         {
-            return _context.TbEvents.Any(e => e.EventId == id);
+            return _context.TbOrders.Any(e => e.OrderId == id);
         }
     }
 }
