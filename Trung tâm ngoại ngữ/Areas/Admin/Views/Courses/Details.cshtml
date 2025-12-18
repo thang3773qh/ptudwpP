@@ -5,111 +5,108 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>TbCourse</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alias)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alias)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShortDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PriceSale)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PriceSale)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContentHours)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContentHours)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalWeeks)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalWeeks)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Level)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Language)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prerequisites)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prerequisites)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastUpdate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastUpdate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Trainer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Trainer.TrainerId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.CourseId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="col-xl">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Chi tiết khóa học</h5>
+                <small class="text-body float-end"><a asp-action="Index">Quay lại danh sách</a></small>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        Tiêu đề
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Title)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Alias)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Alias)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Mô tả
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.Raw(Model.Description)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Mô tả ngắn
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ShortDescription)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Giá
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Giá khuyến mãi
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.PriceSale)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Số giờ học
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ContentHours)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Số tuần học
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TotalWeeks)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Cấp độ
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Level)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Ngôn ngữ
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Language)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Yêu cầu
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Prerequisites)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Hình ảnh
+                    </dt>
+                    <dd class="col-sm-10">
+                        <img src="@Html.DisplayFor(model => model.Image)" width="100" height="100" />
+                    </dd>
+                    <dt class="col-sm-2">
+                        Hiện thị
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.IsActive)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Danh mục
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Category.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Giảng viên
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Trainer.FullName)
+                    </dd>
+                </dl>
+                <a asp-action="Edit" asp-route-id="@Model?.CourseId" class="btn btn-primary">Sửa</a>
+            </div>
+        </div>
+    </div>
 </div>

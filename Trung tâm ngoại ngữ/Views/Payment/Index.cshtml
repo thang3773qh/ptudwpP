@@ -1,0 +1,102 @@
+﻿@model TbCourse
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+        <div class="heading">
+            <div class="container">
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h1>Thanh toán</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li class="current">Thanh toán</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Page Title -->
+    <!-- Contact Section -->
+    <section id="contact" class="contact section mt-5">
+
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4">
+                <h5 class="fw-bold mb-3">Thông tin thanh toán</h5>
+                <form action="/payment/checkout" method="post" class="row" data-aos="fade-up"
+                      data-aos-delay="200">
+                    <div class="col-lg-7">
+                        <input type="hidden" name="course" class="form-control" value=@Model.CourseId>
+                        <input type="hidden" name="amount" class="form-control" value=@Model.PriceSale>
+                        <div class="col-md-12 mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Tên" required="">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" required="">
+                        </div>
+                    </div>
+                    <div class="border border-primary border-2 p-4 rounded col-lg-5">
+
+                        <h5 class="fw-bold mb-3">ĐƠN HÀNG CỦA BẠN</h5>
+
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="fw-semibold">SẢN PHẨM</th>
+                                    <th class="text-end fw-semibold">TẠM TÍNH</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Model.Title
+                                    </td>
+                                    <td class="text-end">@Model.PriceSale</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="fw-semibold">Tạm tính</td>
+                                    <td class="text-end fw-semibold">@Model.PriceSale</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">Tổng</td>
+                                    <td class="text-end">
+                                        <input class="form-control text-end fw-bold"
+                                               type="text" name="Amount" value="@Model.PriceSale" readonly>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="alert alert-warning mt-3 py-2">
+                            Các khóa học chỉ hỗ trợ <strong>thanh toán online</strong>.
+                            Sau khi hoàn tất thanh toán, hệ thống/đội ngũ Admin sẽ <strong>chủ động liên hệ</strong> để xác nhận và kích hoạt khóa học.
+                        </div>
+
+                        <input class="btn btn-danger fw-bold w-100 py-2" type="submit" value="Đặt hàng">
+
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+
+        </div>
+
+    </section><!-- /Contact Section -->
+
+</main>
